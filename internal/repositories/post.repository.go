@@ -13,7 +13,7 @@ func NewPostRepository() PostRepository {
 	}
 }
 
-type PostRepository struct{
+type PostRepository struct {
 	DB gorm.DB
 }
 

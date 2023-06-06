@@ -16,7 +16,7 @@ func NewUserRepository() UserRepository {
 	}
 }
 
-type UserRepository struct{
+type UserRepository struct {
 	DB gorm.DB
 }
 

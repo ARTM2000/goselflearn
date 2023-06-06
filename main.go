@@ -76,7 +76,7 @@ func main() {
 	 * Setup swagger route
 	 */
 	app.Get("/swagger/*", swagger.New(swagger.Config{
-		DeepLinking: false,
+		DeepLinking:     false,
 		TryItOutEnabled: true,
 	}))
 
@@ -97,7 +97,7 @@ func main() {
 
 	// to gracefully shutdown fiber web server
 	go shutdown(app)
-	
+
 	port := 3010
 	if initializers.Config.Port != nil {
 		port = *initializers.Config.Port
