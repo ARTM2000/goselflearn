@@ -9,9 +9,9 @@ import (
 )
 
 type UserRegister struct {
-	Name     string `json:"name" validate:"required,min=3,ascii"`
-	Email    string `json:"email" validate:"required,email"`
-	Password string `json:"password,omitempty" validate:"required,password"`
+	Name     string `json:"name" validate:"required,min=3,ascii" example:"artm2000"`
+	Email    string `json:"email" validate:"required,email" example:"test654@test.com"`
+	Password string `json:"password,omitempty" validate:"required,password" example:"P@ssWord123"`
 }
 
 func (t *UserRegister) Validate() *common.ValidationError {
@@ -35,8 +35,8 @@ func (t *UserRegister) Validate() *common.ValidationError {
 }
 
 type UserLogin struct {
-	Email string `json:"email" validate:"required,email"`
-	Password string `json:"password" validate:"required"`
+	Email    string `json:"email" validate:"required,email" example:"test654@test.com"`
+	Password string `json:"password" validate:"required" example:"P@ssWord123"`
 }
 
 func (t *UserLogin) Validate() *common.ValidationError {

@@ -15,7 +15,6 @@ func AuthorizeUser(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusUnauthorized, common.MessageUnauthorized)
 	}
 
-	
 	tokenString := strings.TrimPrefix(authHeader, "Bearer ")
 	if tokenString == "" {
 		return fiber.NewError(fiber.StatusUnauthorized, common.MessageUnauthorized)

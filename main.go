@@ -3,18 +3,21 @@ package main
 import (
 	"errors"
 	"fmt"
+	_ "goselflearn/docs"
 	"goselflearn/internal/common"
 	"goselflearn/internal/initializers"
 	"goselflearn/internal/routers"
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/helmet"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/gofiber/swagger"
 )
 
 func init() {
@@ -22,6 +25,16 @@ func init() {
 	initializers.DBConnect()
 }
 
+// @title GoSelfLearn
+// @version 1.0
+// @description This project created for self learning simple crud and oauth actions
+// @termsOfService http://swagger.io/terms/
+// @contact.name API Support
+// @contact.email goselflearn@test.io
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+// @host localhost:3010
+// @BasePath /
 func main() {
 	config := fiber.Config{
 		CaseSensitive:                true,
@@ -58,6 +71,15 @@ func main() {
 	app.Use(logger.New())
 	app.Use(requestid.New())
 	app.Use(helmet.New())
+
+	/**
+	 * Setup swagger route
+	 */
+	app.Get("/swagger/*", swagger.New(swagger.Config{
+		DeepLinking: false,
+		TryItOutEnabled: true,
+	}))
+
 	// Here we only allow `application/json` content-type to treat a valid
 	app.Use(func(c *fiber.Ctx) error {
 		contentType := c.Get("Content-Type")
@@ -75,12 +97,15 @@ func main() {
 
 	// to gracefully shutdown fiber web server
 	go shutdown(app)
-
+	
 	port := 3010
 	if initializers.Config.Port != nil {
 		port = *initializers.Config.Port
 	}
-	app.Listen(fmt.Sprintf(":%d", port))
+	err := app.Listen(fmt.Sprintf(":%d", port))
+	if err != nil {
+		log.Fatalln("app listening failed. error: ", err)
+	}
 }
 
 func shutdown(app *fiber.App) {

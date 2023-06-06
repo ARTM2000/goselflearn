@@ -9,8 +9,8 @@ import (
 )
 
 type CreatePost struct {
-	Title       string `json:"title" validate:"required,min=8"`
-	Description string `json:"description" validate:"required,min=30"`
+	Title       string `json:"title" validate:"required,min=8" example:"sample title"`
+	Description string `json:"description" validate:"required,min=30" example:"sample description for creating a new post with swagger"`
 }
 
 func (cp *CreatePost) Validate() *common.ValidationError {

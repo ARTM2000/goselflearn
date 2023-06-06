@@ -3,12 +3,22 @@ package repositories
 import (
 	"goselflearn/internal/initializers"
 	"goselflearn/internal/models"
+
+	"gorm.io/gorm"
 )
 
-type PostRepository struct{}
+func NewPostRepository() PostRepository {
+	return PostRepository{
+		DB: *initializers.DB,
+	}
+}
+
+type PostRepository struct{
+	DB gorm.DB
+}
 
 func (pr *PostRepository) CreatePost(post *models.Post) error {
-	dbResult := initializers.DB.Model(&models.Post{}).Create(post)
+	dbResult := pr.DB.Model(&models.Post{}).Create(post)
 	if dbResult.Error != nil {
 		return dbResult.Error
 	}
@@ -17,7 +27,7 @@ func (pr *PostRepository) CreatePost(post *models.Post) error {
 
 func (pr *PostRepository) FindPostsByUserId(userId uint) (*[]models.Post, error) {
 	var posts []models.Post
-	dbResult := initializers.DB.Model(&models.Post{}).Where(models.Post{UserID: userId}).Find(&posts)
+	dbResult := pr.DB.Model(&models.Post{}).Where(models.Post{UserID: userId}).Find(&posts)
 	if dbResult.Error != nil {
 		return nil, dbResult.Error
 	}

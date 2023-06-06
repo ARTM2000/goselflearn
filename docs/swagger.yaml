@@ -1,0 +1,393 @@
+basePath: /
+definitions:
+  dto.CreatePost:
+    properties:
+      description:
+        example: sample description for creating a new post with swagger
+        minLength: 30
+        type: string
+      title:
+        example: sample title
+        minLength: 8
+        type: string
+    required:
+    - description
+    - title
+    type: object
+  dto.UserLogin:
+    properties:
+      email:
+        example: test654@test.com
+        type: string
+      password:
+        example: P@ssWord123
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  dto.UserRegister:
+    properties:
+      email:
+        example: test654@test.com
+        type: string
+      name:
+        example: artm2000
+        minLength: 3
+        type: string
+      password:
+        example: P@ssWord123
+        type: string
+    required:
+    - email
+    - name
+    - password
+    type: object
+  models.Post:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      id:
+        description: gorm.Model /* this is the default form of declaration */
+        type: integer
+      name:
+        type: string
+      posts:
+        items:
+          $ref: '#/definitions/models.Post'
+        type: array
+      updated_at:
+        type: string
+    type: object
+  response.BaseError:
+    properties:
+      data:
+        type: object
+      error:
+        example: true
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.CreatePost:
+    properties:
+      data:
+        $ref: '#/definitions/response.newPostDataWrapper'
+      error:
+        example: false
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.GetUserInfo:
+    properties:
+      data:
+        $ref: '#/definitions/response.getUserInfoWrapper'
+      error:
+        example: false
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.GetUserPosts:
+    properties:
+      data:
+        $ref: '#/definitions/response.allPostsDataWrapper'
+      error:
+        example: false
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.LoginUser:
+    properties:
+      data:
+        $ref: '#/definitions/response.loginUserData'
+      error:
+        example: false
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.RegisterUser:
+    properties:
+      data:
+        $ref: '#/definitions/response.registerUserData'
+      error:
+        example: false
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.UnauthorizedError:
+    properties:
+      data:
+        type: object
+      error:
+        example: true
+        type: boolean
+      message:
+        example: unauthorized
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.ValidationError:
+    properties:
+      data:
+        $ref: '#/definitions/response.validationErrorWrapper'
+      error:
+        example: true
+        type: boolean
+      message:
+        example: declarative message
+        type: string
+      track_id:
+        example: 408c49e3-ba4e-48bd-9ff9-d94614f87c30
+        type: string
+    type: object
+  response.allPostsDataWrapper:
+    properties:
+      posts:
+        items:
+          $ref: '#/definitions/models.Post'
+        type: array
+    type: object
+  response.getUserInfoWrapper:
+    properties:
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  response.loginUserData:
+    properties:
+      access_token:
+        type: string
+    type: object
+  response.newPostDataWrapper:
+    properties:
+      post:
+        $ref: '#/definitions/models.Post'
+    type: object
+  response.registerUserData:
+    properties:
+      user:
+        $ref: '#/definitions/models.User'
+    type: object
+  response.singleValidationErr:
+    properties:
+      field:
+        example: password
+        type: string
+      message:
+        example: Password is not strong enough
+        type: string
+    type: object
+  response.validationErrorWrapper:
+    properties:
+      error:
+        $ref: '#/definitions/response.singleValidationErr'
+    type: object
+host: localhost:3010
+info:
+  contact:
+    email: goselflearn@test.io
+    name: API Support
+  description: This project created for self learning simple crud and oauth actions
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: GoSelfLearn
+  version: "1.0"
+paths:
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Login user
+      parameters:
+      - description: query params
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLogin'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.LoginUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.BaseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.UnauthorizedError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.ValidationError'
+      tags:
+      - Auth
+  /api/auth/register:
+    post:
+      consumes:
+      - application/json
+      description: Register new user
+      parameters:
+      - description: query params
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserRegister'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.RegisterUser'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.BaseError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.ValidationError'
+      tags:
+      - Auth
+  /api/posts:
+    post:
+      consumes:
+      - application/json
+      description: Create new post with title and description
+      parameters:
+      - description: query params
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/dto.CreatePost'
+      - description: bearer access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.CreatePost'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.BaseError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.UnauthorizedError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.ValidationError'
+      tags:
+      - Post
+  /api/posts/me:
+    post:
+      consumes:
+      - application/json
+      description: Get all user's posts
+      parameters:
+      - description: bearer access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.GetUserPosts'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.UnauthorizedError'
+      tags:
+      - Post
+  /api/user/me:
+    get:
+      consumes:
+      - application/json
+      description: Get user all information
+      parameters:
+      - description: bearer access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.GetUserInfo'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.UnauthorizedError'
+      tags:
+      - Auth
+swagger: "2.0"

@@ -9,7 +9,7 @@ import (
 )
 
 func NewPostService() postService {
-	postRepo := repositories.PostRepository{}
+	postRepo := repositories.NewPostRepository()
 	return postService{
 		postRepository: postRepo,
 	}

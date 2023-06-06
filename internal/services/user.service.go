@@ -14,9 +14,9 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func NewUserService() *userService {
-	userRepo := repositories.UserRepository{}
-	return &userService{
+func NewUserService() userService {
+	userRepo := repositories.NewUserRepository()
+	return userService{
 		userRepository: userRepo,
 	}
 }
@@ -68,14 +68,14 @@ func (us *userService) LoginUser(user *dto.UserLogin) (accessToken *string, err 
 	if err != nil {
 		return nil, fmt.Errorf(common.MessageUserEmailOrPasswordIsInvalid)
 	}
-	
+
 	now := time.Now().UTC()
 	claims := &jwt.MapClaims{
 		"exp": now.Add(initializers.Config.JWTExpiresInMin).Unix(),
 		"iat": now.Unix(),
 		"nbf": now.Unix(),
 		"ext": map[string]string{
-			"id": fmt.Sprint(existingUser.ID),
+			"id":    fmt.Sprint(existingUser.ID),
 			"email": existingUser.Email,
 		},
 	}

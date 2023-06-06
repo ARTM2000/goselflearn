@@ -10,11 +10,19 @@ import (
 	"gorm.io/gorm"
 )
 
-type UserRepository struct{}
+func NewUserRepository() UserRepository {
+	return UserRepository{
+		DB: *initializers.DB,
+	}
+}
+
+type UserRepository struct{
+	DB gorm.DB
+}
 
 func (ur *UserRepository) FindByEmail(email string) (*models.User, error) {
 	var user models.User
-	dbResult := initializers.DB.Model(&models.User{}).Where(models.User{Email: email}).Preload("Posts").First(&user)
+	dbResult := ur.DB.Model(&models.User{}).Where(models.User{Email: email}).Preload("Posts").First(&user)
 	if dbResult.Error != nil {
 		fmt.Println("find by email error: ", dbResult.Error.Error())
 		if errors.Is(dbResult.Error, gorm.ErrRecordNotFound) {
@@ -26,7 +34,8 @@ func (ur *UserRepository) FindByEmail(email string) (*models.User, error) {
 }
 
 func (ur *UserRepository) CreateUser(user *models.User) error {
-	dbResult := initializers.DB.Model(&models.User{}).Create(user)
+	user.Posts = []models.Post{}
+	dbResult := ur.DB.Model(&models.User{}).Preload("Posts").Create(user)
 
 	if errors.Is(dbResult.Error, gorm.ErrDuplicatedKey) {
 		if emailExists := strings.Contains(strings.ToLower(dbResult.Error.Error()), "email"); emailExists {
@@ -40,7 +49,7 @@ func (ur *UserRepository) CreateUser(user *models.User) error {
 
 func (ur *UserRepository) FindUserById(id uint64) (*models.User, error) {
 	var user models.User
-	dbResult := initializers.DB.Model(&models.User{}).Where("id = ?", id).Preload("Posts").First(&user)
+	dbResult := ur.DB.Model(&models.User{}).Where("id = ?", id).Preload("Posts").First(&user)
 	if dbResult.Error != nil {
 		fmt.Println("find by email error: ", dbResult.Error.Error())
 		if errors.Is(dbResult.Error, gorm.ErrRecordNotFound) {

@@ -31,7 +31,7 @@ func (a *APIRoutes) Routes() *fiber.App {
 	api.Route("/posts", func(r fiber.Router) {
 		r.Use(middleware.AuthorizeUser)
 		r.Post("/", controllers.CreatePostForUser)
-		r.Get("/me",controllers.GetUserPosts)
+		r.Get("/me", controllers.GetUserPosts)
 	})
 
 	return api
