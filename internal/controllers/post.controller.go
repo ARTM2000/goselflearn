@@ -10,18 +10,18 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-//		@Summery     Create new post
-//		@Description Create new post with title and description
-//		@Tags        Post
-//		@Accept      json
-//	 @Produce     json
-//	 @Param       body          body     dto.CreatePost             true "query params"
-//	 @Param       Authorization header   string                     true "bearer access token"
-//	 @Success     200           {object} response.CreatePost
-//	 @Failure     400           {object} response.BaseError
-//	 @Failure     401           {object} response.UnauthorizedError
-//	 @Failure     422           {object} response.ValidationError
-//	 @Router      /api/posts    [post]
+// @Summery     Create new post
+// @Description Create new post with title and description
+// @Tags        Post
+// @Accept      json
+// @Produce     json
+// @Param       body          body     dto.CreatePost             true "query params"
+// @Param       Authorization header   string                     true "bearer access token"
+// @Success     200           {object} response.CreatePost
+// @Failure     400           {object} response.BaseError
+// @Failure     401           {object} response.UnauthorizedError
+// @Failure     422           {object} response.ValidationError
+// @Router      /api/posts    [post]
 func CreatePostForUser(c *fiber.Ctx) error {
 	var createPostData dto.CreatePost
 
@@ -57,15 +57,15 @@ func CreatePostForUser(c *fiber.Ctx) error {
 	}))
 }
 
-//		@Summery     Get user's posts
-//		@Description Get all user's posts
-//		@Tags        Post
-//		@Accept      json
-//	 @Produce     json
-//	 @Param       Authorization header   string                     true "bearer access token"
-//	 @Success     200           {object} response.GetUserPosts
-//	 @Failure     401           {object} response.UnauthorizedError
-//	 @Router      /api/posts/me [post]
+// @Summery     Get user's posts
+// @Description Get all user's posts
+// @Tags        Post
+// @Accept      json
+// @Produce     json
+// @Param       Authorization header   string                     true "bearer access token"
+// @Success     200           {object} response.GetUserPosts
+// @Failure     401           {object} response.UnauthorizedError
+// @Router      /api/posts/me [post]
 func GetUserPosts(c *fiber.Ctx) error {
 	userData := c.Locals("user").(*models.User)
 

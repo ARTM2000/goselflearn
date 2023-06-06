@@ -10,16 +10,16 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-//		@Summery     Register user
-//		@Description Register new user
-//		@Tags        Auth
-//		@Accept      json
-//	 @Produce     json
-//	 @Param       body               body     dto.UserRegister         true "query params"
-//	 @Success     200                {object} response.RegisterUser
-//	 @Failure     400                {object} response.BaseError
-//	 @Failure     422                {object} response.ValidationError
-//	 @Router      /api/auth/register [post]
+// @Summery     Register user
+// @Description Register new user
+// @Tags        Auth
+// @Accept      json
+// @Produce     json
+// @Param       body               body     dto.UserRegister         true "query params"
+// @Success     200                {object} response.RegisterUser
+// @Failure     400                {object} response.BaseError
+// @Failure     422                {object} response.ValidationError
+// @Router      /api/auth/register [post]
 func RegisterUser(c *fiber.Ctx) error {
 	newUser := dto.UserRegister{}
 	if err := c.BodyParser(&newUser); err != nil {
@@ -61,17 +61,17 @@ func RegisterUser(c *fiber.Ctx) error {
 	}))
 }
 
-//		@Summery     Login user
-//		@Description Login user
-//		@Tags        Auth
-//		@Accept      json
-//	 @Produce     json
-//	 @Param       body            body     dto.UserLogin              true "query params"
-//	 @Success     200             {object} response.LoginUser
-//	 @Failure     401             {object} response.UnauthorizedError
-//	 @Failure     400             {object} response.BaseError
-//	 @Failure     422             {object} response.ValidationError
-//	 @Router      /api/auth/login [post]
+// @Summery     Login user
+// @Description Login user
+// @Tags        Auth
+// @Accept      json
+// @Produce     json
+// @Param       body            body     dto.UserLogin              true "query params"
+// @Success     200             {object} response.LoginUser
+// @Failure     401             {object} response.UnauthorizedError
+// @Failure     400             {object} response.BaseError
+// @Failure     422             {object} response.ValidationError
+// @Router      /api/auth/login [post]
 func LoginUser(c *fiber.Ctx) error {
 
 	loginData := dto.UserLogin{}
@@ -109,15 +109,15 @@ func LoginUser(c *fiber.Ctx) error {
 	}))
 }
 
-//		@Summery     Get user info
-//		@Description Get user all information
-//		@Tags        Auth
-//		@Accept      json
-//	 @Produce     json
-//	 @Param       Authorization header   string                     true "bearer access token"
-//	 @Success     200           {object} response.GetUserInfo
-//	 @Failure     401           {object} response.UnauthorizedError
-//	 @Router      /api/user/me  [get]
+// @Summery     Get user info
+// @Description Get user all information
+// @Tags        Auth
+// @Accept      json
+// @Produce     json
+// @Param       Authorization header   string                     true "bearer access token"
+// @Success     200           {object} response.GetUserInfo
+// @Failure     401           {object} response.UnauthorizedError
+// @Router      /api/user/me  [get]
 func GetUserInfo(c *fiber.Ctx) error {
 	userData := c.Locals("user").(*models.User)
 
