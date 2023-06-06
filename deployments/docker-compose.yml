@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: goselflearn_db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=goselflearn
+    ports:
+      - 5432:5432
+    volumes:
+      - goselfdb:/var/lib/postgresql/data
+
+volumes:
+  goselfdb:

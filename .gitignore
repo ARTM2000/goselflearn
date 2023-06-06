@@ -1,0 +1,6 @@
+tmp
+build
+.DS_Store
+
+*.env
+!*.env.*
