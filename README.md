@@ -1,7 +1,7 @@
 # GoSelfLearn
 My First golang mvc sample with simple blog post concept
 
-# Requirements
+## Requirements
 - Docker (v20 or later)
 - Docker Compose (v2 or later)
 - Go (v1.19.x or later)
