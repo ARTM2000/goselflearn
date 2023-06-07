@@ -2,13 +2,14 @@ package services
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
-	"goselflearn/internal/controllers/dto"
-	"goselflearn/internal/initializers"
-	"goselflearn/internal/models"
-	"goselflearn/internal/repositories"
 	"strconv"
 	"time"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/controllers/dto"
+	"github.com/ARTM2000/goselflearn/internal/initializers"
+	"github.com/ARTM2000/goselflearn/internal/models"
+	"github.com/ARTM2000/goselflearn/internal/repositories"
 
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"

@@ -1,8 +1,8 @@
 package repositories
 
 import (
-	"goselflearn/internal/initializers"
-	"goselflearn/internal/models"
+	"github.com/ARTM2000/goselflearn/internal/initializers"
+	"github.com/ARTM2000/goselflearn/internal/models"
 
 	"gorm.io/gorm"
 )

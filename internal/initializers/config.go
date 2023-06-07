@@ -2,8 +2,9 @@ package initializers
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
 	"time"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"

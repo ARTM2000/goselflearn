@@ -2,7 +2,7 @@ prepare:
 	@([[ ! -e ./app.env ]] && cp ./app.env.sample ./app.env) || echo "app.env exists" 
 
 build: prepare
-	@go build -o ./build/goselflearn
+	@GOOS=${GOOS:-linux} GOARCH=${GOARCH:-amd64} go build -o ./build/goselflearn_${GOOS}_${GOARCH}
 
 run: build
 	@go run ./main.go

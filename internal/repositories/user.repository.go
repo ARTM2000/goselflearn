@@ -3,9 +3,10 @@ package repositories
 import (
 	"errors"
 	"fmt"
-	"goselflearn/internal/initializers"
-	"goselflearn/internal/models"
 	"strings"
+
+	"github.com/ARTM2000/goselflearn/internal/initializers"
+	"github.com/ARTM2000/goselflearn/internal/models"
 
 	"gorm.io/gorm"
 )

@@ -2,8 +2,9 @@ package initializers
 
 import (
 	"fmt"
-	"goselflearn/internal/models"
 	"log"
+
+	"github.com/ARTM2000/goselflearn/internal/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

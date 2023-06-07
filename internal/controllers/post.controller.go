@@ -2,10 +2,11 @@ package controllers
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
-	"goselflearn/internal/controllers/dto"
-	"goselflearn/internal/models"
-	"goselflearn/internal/services"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/controllers/dto"
+	"github.com/ARTM2000/goselflearn/internal/models"
+	"github.com/ARTM2000/goselflearn/internal/services"
 
 	"github.com/gofiber/fiber/v2"
 )

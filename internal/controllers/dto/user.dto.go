@@ -2,8 +2,9 @@ package dto
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
 	"strings"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
 
 	"github.com/go-playground/validator/v10"
 )

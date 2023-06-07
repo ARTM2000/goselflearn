@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/common"
 
 	"github.com/gofiber/fiber/v2"
 )

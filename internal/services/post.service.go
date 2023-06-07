@@ -2,10 +2,11 @@ package services
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
-	"goselflearn/internal/controllers/dto"
-	"goselflearn/internal/models"
-	"goselflearn/internal/repositories"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/controllers/dto"
+	"github.com/ARTM2000/goselflearn/internal/models"
+	"github.com/ARTM2000/goselflearn/internal/repositories"
 )
 
 func NewPostService() postService {

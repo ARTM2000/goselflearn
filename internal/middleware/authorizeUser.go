@@ -2,9 +2,10 @@ package middleware
 
 import (
 	"fmt"
-	"goselflearn/internal/common"
-	"goselflearn/internal/services"
 	"strings"
+
+	"github.com/ARTM2000/goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/services"
 
 	"github.com/gofiber/fiber/v2"
 )

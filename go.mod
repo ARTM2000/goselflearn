@@ -1,4 +1,4 @@
-module goselflearn
+module github.com/ARTM2000/goselflearn
 
 go 1.19
 

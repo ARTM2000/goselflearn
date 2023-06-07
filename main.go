@@ -3,14 +3,15 @@ package main
 import (
 	"errors"
 	"fmt"
-	_ "goselflearn/docs"
-	"goselflearn/internal/common"
-	"goselflearn/internal/initializers"
-	"goselflearn/internal/routers"
 	"log"
 	"os"
 	"os/signal"
 	"syscall"
+
+	_ "github.com/ARTM2000/goselflearn/docs"
+	"github.com/ARTM2000/goselflearn/internal/common"
+	"github.com/ARTM2000/goselflearn/internal/initializers"
+	"github.com/ARTM2000/goselflearn/internal/routers"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/helmet"

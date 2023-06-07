@@ -1,6 +1,6 @@
 package response
 
-import "goselflearn/internal/models"
+import "github.com/ARTM2000/goselflearn/internal/models"
 
 type newPostDataWrapper struct {
 	Post models.Post `json:"post"`

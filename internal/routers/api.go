@@ -1,8 +1,8 @@
 package routers
 
 import (
-	"goselflearn/internal/controllers"
-	"goselflearn/internal/middleware"
+	"github.com/ARTM2000/goselflearn/internal/controllers"
+	"github.com/ARTM2000/goselflearn/internal/middleware"
 
 	"github.com/gofiber/fiber/v2"
 )
