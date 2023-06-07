@@ -7,7 +7,10 @@ build: prepare
 run: build
 	@go run ./main.go
 
-dev:
+setup_dev:
+	@! command -v air &>/dev/null && echo "air not found, installing air" && go install github.com/cosmtrek/air@latest || echo "air exists"
+
+dev: setup_dev
 	air .
 
 format:
